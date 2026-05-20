@@ -1,5 +1,6 @@
 package com.juhyang.mbting.user.bo;
 
+import com.juhyang.mbting.user.dto.MatchingProfileRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -64,41 +65,32 @@ public class UserBO {
   }
 
   // 매칭 프로필 변경
-  public int editMatchingProfile(int userId, List<String> myMeritArr, List<String> myHobbyArr,
-      List<String> myCharacterArr, List<String> yourMeritArr, List<String> yourHobbyArr,
-      List<String> yourCharacterArr, List<String> ageArr) {
+  public int editMatchingProfile(int userId, MatchingProfileRequest request) {
 
+    String mymerit = makeReturnString(request.getMyMeritArr());
 
-    String mymerit = "";
-    mymerit = makeReturnString(myMeritArr);
+    String myHobby = makeReturnString(request.getMyHobbyArr());
 
+    String myCharacter = makeReturnString(request.getMyCharacterArr());
 
-    String myHobby = "";
-    myHobby = makeReturnString(myHobbyArr);
+    String yourMerit = makeReturnString(request.getYourMeritArr());
 
+    String yourHobby = makeReturnString(request.getYourHobbyArr());
 
-    String myCharacter = "";
-    myCharacter = makeReturnString(myCharacterArr);
+    String yourCharacter = makeReturnString(request.getYourCharacterArr());
 
-    String yourMerit = "";
-    yourMerit = makeReturnString(yourMeritArr);
+    String age = makeReturnString(request.getAgeArr());
 
-
-    String yourHobby = "";
-    yourHobby = makeReturnString(yourHobbyArr);
-
-
-    String yourCharacter = "";
-    yourCharacter = makeReturnString(yourCharacterArr);
-
-
-    String age = "";
-    age = makeReturnString(ageArr);
-
-
-
-    return userDAO.updateMatchingProfile(userId, mymerit, myHobby, myCharacter, yourMerit,
-        yourHobby, yourCharacter, age);
+    return userDAO.updateMatchingProfile(
+        userId,
+        mymerit,
+        myHobby,
+        myCharacter,
+        yourMerit,
+        yourHobby,
+        yourCharacter,
+        age
+    );
 
   }
 
